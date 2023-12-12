@@ -1,0 +1,14 @@
+<aside class="sidebar">
+  <ul class="sidebar-menu">
+    <li *ngIf="user?.userType===0"><a routerLink="/admin/profile">Profil</a></li>
+    <li *ngIf="user?.userType===0"><a routerLink="/admin/users">Kullanıcılar</a></li>
+    <li *ngIf="user?.userType===0"><a routerLink="/admin/accounts">Hesaplar</a></li>
+    <li *ngIf="user?.userType===1"><a routerLink="/user/profile">Profile</a></li>
+    <li *ngIf="user?.userType===1"><a routerLink="/user/accounts">Hesaplarım</a></li>
+    <li *ngIf="user?.userType===1"><a routerLink="/user/transactions">İşlemler</a></li>   
+    <li *ngIf="user?.userType===2"><a routerLink="/employee/users">Kullanıcılar</a></li>
+    <li *ngIf="user?.userType===2"><a routerLink="/employee/accounts">Hesaplar</a></li>
+
+
+  </ul>
+</aside>

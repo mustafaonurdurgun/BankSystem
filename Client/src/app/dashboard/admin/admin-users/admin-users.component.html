@@ -1,0 +1,82 @@
+<div *ngIf="users" class="container"
+    style="position:absolute; width: 30%; top: 20%; left: 30%; transform: translate(-50%, -50%); margin-top: 100px; margin-left:100px;">
+
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>User ID</th>
+                <th>Ad</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>User Type</th>
+                <th>Güncelle</th>
+                <th>Sil</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Kullanıcıları döngüye alıyoruz -->
+            <tr *ngFor="let user of users">
+                <img src="{{user.imagePath}}" style="width: 50px; height: 50px;">
+                <td>{{ user.id }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.userType === 0 ? 'Admin' : 'User' }}</td>
+                <td>
+                    <div class="button-group">
+                        <button class="btn btn-warning" style="width: 8rem;"
+                            (click)="showUpdateForm(user)">Güncelle</button>
+                    </div>
+                </td>
+                <td>
+                    <div class="button-group">
+                        <button class="btn btn-danger" style="width: 8rem;" (click)="onDelete(user.id)">Sil</button>
+                    </div>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="modal-overlay" *ngIf="editedUser">
+    <div class="modal-dialog">
+        <h2>Kullanıcı Güncelle</h2>
+        <form>
+            <div class="form-group">
+                <label for="updatedFirstName" style="color: gray;">İsim</label>
+                <input type="text" class="form-control" id="updatedFirstName" name="updateFirstName"
+                    [(ngModel)]="editedUser.firstName">
+            </div>
+
+            <div class="form-group">
+                <label for="updatedLastName" style="color: gray;">Soyisim</label>
+                <input type="text" class="form-control" id="updatedLastName" name="updateLastName"
+                    [(ngModel)]="editedUser.lastName">
+            </div>
+            <div class="form-group">
+                <label for="updatedEmail" style="color: gray;">Email</label>
+                <input type="text" class="form-control" id="updatedEmail" name="updatedEmail"
+                    [(ngModel)]="editedUser.email">
+            </div>
+            <div class="form-group">
+                <label for="adress" style="color: gray; margin-top: 10px; ">Kullanıcı Türü Seçimi</label>
+                <select id="userType" style="border: 1px solid gray;" [(ngModel)]="editedUser.userType"
+                    [ngModelOptions]="{standalone: true}">
+                    <option [value]="userType.User">Müşteri</option>
+                    <option [value]="userType.Employee">Çalışan</option>
+                </select>
+            </div>
+
+            <div class="button-container">
+                <button type="button" (click)="cancelUpdate()" class="btn btn-secondary">İptal</button>
+                <button type="button" (click)="updateUser()" class="btn btn-primary">Kaydet</button>
+            </div>
+
+        </form>
+    </div>
+</div>

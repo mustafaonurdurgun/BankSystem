@@ -1,0 +1,31 @@
+<div *ngIf="accounts" class="container"
+    style="position:absolute; width: 30%; top: 20%; left: 30%; transform: translate(-50%, -50%); margin-top: 50px; margin-left:100px;">
+
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>Bakiye</th>
+                <th>Ad Soyad</th>
+                <th>Hesap No</th>
+                
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Kullanıcıları döngüye alıyoruz -->
+            <tr *ngFor="let acc of accounts">               
+                <td>{{ acc.balance }}</td>    
+                <td>{{ acc.user?.firstName}} {{ acc.user?.lastName}} </td>                 
+                <td>{{ acc.id}} </td>     
+                <td>
+                    <div class="button-group">
+                        <button class="btn btn-danger" style="width: 8rem;" (click)="onDelete(acc.id)">Sil</button>
+                    </div>
+                </td>          
+                
+
+            </tr>
+        </tbody>
+    </table>
+</div>

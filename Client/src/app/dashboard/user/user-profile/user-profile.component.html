@@ -1,0 +1,83 @@
+<div *ngIf="user"  class="container"
+  style="position:absolute; width: 50%; top: 20%; left: 30%; transform: translate(-50%, -50%); margin-top: 120px;  ">
+  <div class="projcard projcard-blue" *ngIf="user">
+    <div class="projcard-innerbox">
+      <div class="container py-5">
+        <div class="row profile">
+          <div class="col-lg-4">
+          </div>
+          <div class="col-lg-8">
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="row">
+                    <img src="{{user.imagePath}}" style="width: 100px; height: 100px;">
+                  </div>
+                  <div class="col-sm-3">
+                    <p class="mb-0">Ad Soyad</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.firstName}} {{user.lastName}}</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Email</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.email}}</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Kullanıcı Türü</p>
+                  </div>
+                  <div class="col-sm-3">
+                    <p class="mb-0" *ngIf="user.userType === 1"> User</p>
+                  </div>
+                </div>
+                <hr>
+                <button class="btn btn-danger" type="submit" (click)="showChangeModal()">Change Password</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showPwChange">
+  <div class="modal-dialog">
+    <div>
+      <form (ngSubmit)="changePassword()">
+        <div class="form-group">
+          <label style="color: gray; margin-top: 10px;">Email</label>
+          <input type="text" class="form-control" [(ngModel)]="pw!.email" name="email" placeholder="{{user?.email}}" disabled>
+
+        </div>
+        <div class="form-group">
+          <label style="color: gray; margin-top: 10px;">Yeni Şifre</label>
+          <input type="password" class="form-control" [(ngModel)]="pw!.password" name="password">
+        </div>
+        <div class="form-group">
+          <label style="color: gray; margin-top: 10px;">Şifre Onayla</label>
+          <input type="password" class="form-control" [(ngModel)]="confirmPassword" name="confirmPassword">
+        </div>
+        <div
+          style="margin-top: 15px; width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 50%;">
+            <button type="button" (click)="cancelUpdate()" class="btn btn-warning"
+              style="width: 100%;">Cancel</button>
+          </div>
+          <div style="width: 50%; margin-top: 10px;">
+            <button type="submit" class="btn btn-danger" style="width: 100%;">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

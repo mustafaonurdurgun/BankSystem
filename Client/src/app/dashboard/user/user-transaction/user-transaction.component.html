@@ -1,0 +1,66 @@
+<div *ngIf="transactions" class="container"
+    style="position:absolute; width: 30%; top: 20%; left: 30%; transform: translate(-50%, -50%); margin-top: 150px; margin-left:100px;">
+
+    <table class="table ">
+        <thead>
+            <tr>
+
+                <th>İşlem miktarı</th>
+                <th>Açıklama</th>
+                <th>User</th>
+
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Kullanıcıları döngüye alıyoruz -->
+            <tr *ngFor="let acc of transactions">
+
+                <td>{{ acc.amount }}</td>
+                <td>{{ acc.description}} </td>
+                <td>{{ acc.account?.user?.firstName}} {{acc.account?.user?.lastName}} </td>
+
+
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-danger" (click)="makeTransaction()">işlem yap</button>
+</div>
+
+<div class="modal-overlay" *ngIf="transactionForm">
+    <div class="modal-dialog">
+        <form>
+            <h1 style="margin-bottom: 15px;">Yeni İşlem</h1>
+            <div class="form-group">
+                <label for="eventText" style="color: gray;">İşlem Miktarı</label>
+                <input type="number" class="form-control" id="eventText" name="eventText"
+                    [(ngModel)]="newTransaction.amount" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label for="eventText" style="color: gray;">Açıklama</label>
+                <input type="text" class="form-control" id="eventText" name="eventText"
+                    [(ngModel)]="newTransaction.description" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label for="eventText" style="color: gray;">Göndermek istediğiniz hesabınız</label>
+                <select id="adress" style="border: 1px solid gray;" [(ngModel)]="newUserTransaction.userID"
+                    [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let acc of myAccount" [value]="acc.id">{{ acc.user?.firstName}} {{
+                        acc.user?.lastName}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="eventText" style="color: gray;">Göndermek istediğiniz kişi hesabı</label>
+                <select id="adress" style="border: 1px solid gray;" [(ngModel)]="newTransaction.accountID"
+                    [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let acc of accounts" [value]="acc.id">{{ acc.user?.firstName}} {{
+                        acc.user?.lastName}}</option>
+                </select>
+            </div>
+
+        </form>
+        <button class="btn btn-danger" (click)="transaction()">Para Gönder</button>
+    </div>
+</div>

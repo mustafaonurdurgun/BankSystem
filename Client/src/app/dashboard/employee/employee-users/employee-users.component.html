@@ -1,0 +1,35 @@
+<div *ngIf="users" class="container"
+    style="position:absolute; width: 30%; top: 20%; left: 30%; transform: translate(-50%, -50%); margin-top: 100px; margin-left:100px;">
+
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>User ID</th>
+                <th>Ad</th>
+                <th>Last Name</th>
+                <th>Email</th>                
+                <th>Sil</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Kullanıcıları döngüye alıyoruz -->
+            <tr *ngFor="let user of users">
+                <img src="{{user.imagePath}}" style="width: 50px; height: 50px;">
+                <td>{{ user.id }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>                           
+                <td>
+                    <div class="button-group">
+                        <button class="btn btn-danger" style="width: 8rem;" (click)="onDelete(user.id)">Sil</button>
+                    </div>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
